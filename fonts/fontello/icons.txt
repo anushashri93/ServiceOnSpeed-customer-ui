@@ -1,0 +1,113 @@
+Icons 
+import Icon from '../components/CustomIcon';
+
+AppNavigatorContainer.js
+menu size 25
+
+AppWrapper.js 
+drawerLabel: 'Home  ',"home"
+' Login / SingUp   ',  <Icon name="user-circle"
+'My Booking  ',<Icon name="booking"
+'Know Services     ',Icon name="know service"
+'Offers  ',Icon name="offers" 
+'Refer & Earn  ',="refer-earn"
+
+
+'Support  ', <Icon name="support"
+'About  ',<Icon name="mobile-number"
+
+Welcome.js
+hollow-empty:filled-confirm
+size:15
+size 22
+
+Booking navigator Container.js
+size 25,menu:25
+
+AuthNavigatorContainer.js
+menu:25
+ 
+Booking.js
+size={25}name="back"
+ size={22} name="store"
+
+KnowYourServiceContainer.js
+size={25} name="menu"
+
+KnowService.js
+
+
+
+Bookingdetails.js
+  size={15}name="building-filled"
+ size={15}name="location"
+  size={15}name="car"
+   size={12}  name="rupee" * 3
+
+Dentpaint.js,Fitment.js
+no icons
+
+GetPushNotificationData.js
+No icon
+
+JobCard.js
+No icon
+
+
+
+
+
+Know Services.js
+<Icon  name="right-big" color="#d8d8d8" size={15}/>
+
+Offerpage.js
+No icons
+
+OtpLogin.js
+service-list" size={22}
+d8d8d8
+
+PhoneNumber.js
+ name="mobile-number" color="#d8d8d8" size={22}
+
+ProfileSection.js
+No icons
+
+PushNotification.js 
+No icons
+
+RegistrationPage.js
+name="profile" color="#d8d8d8" size={22}
+name="mobile-number" color="#d3d3d3" size={22}
+name="email" color="#d3d3d3" size={22}
+
+Rsa.js
+No icon
+
+SelectPlace.js
+name="location" color="#d8d8d8" size={15}/>
+name="search" color='#d8d8d8' size={15}/>
+
+MinorFix.js
+Noicons
+
+SelectVehicle.js
+name="search" color="#dcdcdc" size={22}
+name="bike" color="#000000" size={15}
+ name="car" color="#000000" size={15}
+
+NewStatusBar.js
+size={40} name="checked-tick" color="#ffffff"
+
+ServiceBook.js
+size={25}name="left-open"color="#ffffff"
+Icon size={15} name="calendar" color="#0000000"
+Icon size={15} name="car"  color="#000000"
+Icon size={15} name="address-confirm"  color="#000000"
+size={15name="briefcase"color="#000000"
+name="tick"
+name="choose-mode"
+name="filled-confirm"size={20}
+"hollow-pickup" size={20}
+
+
