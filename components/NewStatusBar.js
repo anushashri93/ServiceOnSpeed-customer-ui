@@ -148,7 +148,7 @@ export default class StatusBar extends Component {
                     <View style={styles.verticleLine}></View>
                     <View style={styles.greenTickBox}>
                         <View style={styles.greenTickImageBox}>
-                        {this.state.counter>=6?<Icon size={40} name="checked-tick" color="#ffffff"/>:null}
+                        {this.state.counter>=1?<Icon size={40} name="checked-tick" color="#ffffff"/>:null}
                         </View>
                     </View>
                     <View style={styles.trackerDetailsContainer}>
@@ -176,7 +176,7 @@ export default class StatusBar extends Component {
                     <View style={styles.verticleLine}></View>
                     <View style={styles.greenTickBox}>
                         <View style={styles.greenTickImageBox}>
-                        {this.state.counter>=6?<Icon size={40} name="checked-tick" color="#ffffff"/>:null}
+                        {this.state.counter>=4?<Icon size={40} name="checked-tick" color="#ffffff"/>:null}
                         </View>
                     </View>
                     <View style={styles.trackerDetailsContainer}>
@@ -219,7 +219,7 @@ export default class StatusBar extends Component {
                                 "Drop Initiated" :  null     
                             }
                             {
-                                this.state.counter ===7? 
+                                this.state.counter >=7? 
                                 "Completed" :  null     
                             }
                         </Text>

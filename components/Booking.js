@@ -7,7 +7,8 @@ import {
   TouchableOpacity,
   Modal,
   Alert,
-  AsyncStorage
+  AsyncStorage,
+  ActivityIndicator
 } from 'react-native';
 import Icon from '../components/CustomIcon';
 import axios from 'axios';
@@ -20,6 +21,7 @@ class Booking extends Component {
     super(props);
     this.state={
       modalVisible: false,
+      showLoader: true,
       listBookings:[],
       customerToken:null,
       currentBookingData: {}
@@ -101,6 +103,9 @@ getDataPreviousBooking(customerToken){
           listBookings : response.data,
         }, () => {
           console.log(JSON.stringify(customerToken));
+          this.setState({
+            showLoader:false
+          })
         });    
     }).catch((response) => {
         alert('In Catch' + (response))
@@ -108,84 +113,88 @@ getDataPreviousBooking(customerToken){
         });
 }
   render() {
-    return (
-      <React.Fragment>
-        <Modal
-          animationType="slide"
-          transparent={false}
-          visible={this.state.modalVisible}
-          onRequestClose={() => {
-            Alert.alert('Modal has been closed.');
-          }}><ScrollView>
-            <View style={{height:52,width:"100%",backgroundColor:"#015b63",padding:10,flexDirection:"row"}}>
-						<TouchableOpacity onPress={() => {
-							this.setModalVisible(!this.state.modalVisible);
-					  	}}>
-					  		<Icon
-								size={25}
-                name="back"
-               	color="#ffffff"
-							/>
-						</TouchableOpacity>
-						<View style={{alignItems:"center",width:"100%",justifyContent:"center"}}>
-							<Text style={{color:"#ffffff",fontSize:18,fontWeight:"bold"}}>Booking Details</Text>
-						</View>
-					</View>
-              <BookingDetails currentBookingData = {this.state.currentBookingData}/>
-         </ScrollView>
-        </Modal>
-      <ScrollView style={{backgroundColor:"#f8f8f8"}}>
-        {
-          this.state.listBookings.map((booking) => {
-          return (
-        <View>
-        <TouchableOpacity style={{backgroundColor:"#fff",marginTop:10}} onPress={() => this.bookingDetails(booking)}>        
-          <View style={{flexDirection:"row",marginTop:10}}>
-            <View style={{width:"60%",flexDirection:"row",paddingLeft:10}}>
-              <Icon
-              size={22}
-              name="store"
-             color="#015b63"
-              />
-            <View style={{marginLeft:12}}>
-                <Text style={{
-                fontSize:17,color:"#000000"
-                }}>{booking.shopName}
-                </Text>
-            </View>        
-          </View>
-          <View style={{width:"40%",alignItems:"flex-end",paddingRight:10}}>
-            <Text style=
-            {{
-             fontSize:13,
-             color:"#5d5d59"
-            }}>{(booking.dateTime)}
-            </Text>
-          </View>
-          </View>
-          <View style={{marginLeft:40,flexDirection:"row"}}>
-          <View><Text style={{color:"#5d5b59", fontSize:15,marginTop:15}}>Booking ID : </Text></View>
-          <Text style={{color:"#5d5b59", fontSize:15,marginTop:15}}>{booking.bookingId}</Text></View>
-          <View style={{flexDirection:"row",marginTop:20,marginBottom:15}}>
-            <View style={{width:"60%",flexDirection:"row"}}>
-          <View style={{marginLeft:40}}>
-          <Text style={{
-            fontSize:13,color:"#5d5d59"
-          }}>{booking.vehicle}</Text></View>        
-          </View>
-            <View style={{width:"40%",alignItems:"flex-end",paddingRight:10}}>
-            <Text style={{color:booking.bookingStatus !== -1?(booking.bookingStatus === 7 ? 'green' : 'orange') : 'red'}}>
-            {booking.bookingStatus !== -1 ? (booking.bookingStatus === 7 ? 'COMPLETED' : 'ONGOING') : 'CANCELLED '}</Text>
+    if(!this.state.showLoader) {
+      return (
+        <React.Fragment>
+          <Modal
+            animationType="slide"
+            transparent={false}
+            visible={this.state.modalVisible}
+            onRequestClose={() => {
+              Alert.alert('Modal has been closed.');
+            }}><ScrollView>
+              <View style={{height:52,width:"100%",backgroundColor:"#015b63",padding:10,flexDirection:"row"}}>
+              <TouchableOpacity onPress={() => {
+                this.setModalVisible(!this.state.modalVisible);
+                }}>
+                  <Icon
+                  size={25}
+                  name="back"
+                   color="#ffffff"
+                />
+              </TouchableOpacity>
+              <View style={{alignItems:"center",width:"100%",justifyContent:"center"}}>
+                <Text style={{color:"#ffffff",fontSize:18,fontWeight:"bold"}}>Booking Details</Text>
+              </View>
             </View>
+                <BookingDetails currentBookingData = {this.state.currentBookingData}/>
+           </ScrollView>
+          </Modal>
+        <ScrollView style={{backgroundColor:"#f8f8f8"}}>
+          {
+            this.state.listBookings.map((booking, index) => {
+            return (
+          <View key={index}> 
+          <TouchableOpacity style={{backgroundColor:"#fff",marginTop:10}} onPress={() => this.bookingDetails(booking)}>        
+            <View style={{flexDirection:"row",marginTop:10}}>
+              <View style={{width:"60%",flexDirection:"row",paddingLeft:10}}>
+                <Icon
+                size={22}
+                name="store"
+               color="#015b63"
+                />
+              <View style={{marginLeft:12}}>
+                  <Text style={{
+                  fontSize:17,color:"#000000"
+                  }}>{booking.shopName}
+                  </Text>
+              </View>        
+            </View>
+            <View style={{width:"40%",alignItems:"flex-end",paddingRight:10}}>
+              <Text style=
+              {{
+               fontSize:13,
+               color:"#5d5d59"
+              }}>{(booking.dateTime)}
+              </Text>
+            </View>
+            </View>
+            <View style={{marginLeft:40,flexDirection:"row"}}>
+            <View><Text style={{color:"#5d5b59", fontSize:15,marginTop:15}}>Booking ID : </Text></View>
+            <Text style={{color:"#5d5b59", fontSize:15,marginTop:15}}>{booking.bookingId}</Text></View>
+            <View style={{flexDirection:"row",marginTop:20,marginBottom:15}}>
+              <View style={{width:"60%",flexDirection:"row"}}>
+            <View style={{marginLeft:40}}>
+            <Text style={{
+              fontSize:13,color:"#5d5d59"
+            }}>{booking.vehicle}</Text></View>        
+            </View>
+              <View style={{width:"40%",alignItems:"flex-end",paddingRight:10}}>
+              <Text style={{color:booking.bookingStatus !== -1?(booking.bookingStatus === 7 ? 'green' : 'orange') : 'red'}}>
+              {booking.bookingStatus !== -1 ? (booking.bookingStatus === 7 ? 'COMPLETED' : 'ONGOING') : 'CANCELLED '}</Text>
+              </View>
+            </View>
+          </TouchableOpacity>
           </View>
-        </TouchableOpacity>
-        </View>
-        )
-          })
-        }
-      </ScrollView>
-      </React.Fragment>
-    );
+          )
+            })
+          }
+        </ScrollView>
+        </React.Fragment>
+        );
+    } else {
+      return (<View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}><ActivityIndicator size="large" color="#015b63" /></View>)
+  }
   }
 }
 
